@@ -1,7 +1,7 @@
 use std::fs::*;
 use std::io::*;
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 enum Choose {
     Rock,
     Paper,
@@ -39,7 +39,23 @@ fn main() {
         let chars = line.chars().collect::<Vec<char>>();
 
         let p1 = Choose::from_p1(chars.first().unwrap()).unwrap();
-        let p2 = Choose::from_p2(chars.last().unwrap()).unwrap();
+        let mut p2 = Choose::from_p2(chars.last().unwrap()).unwrap();
+
+        match p2 {
+            Choose::Rock => 
+            match p1 {
+                Choose::Rock => p2 = Choose::Scissors,
+                Choose::Paper => p2= Choose::Rock,
+                Choose::Scissors => p2 = Choose::Paper,
+            },
+            Choose::Paper => p2 = p1.clone(),
+            Choose::Scissors => 
+            match p1 {
+                Choose::Rock => p2 = Choose::Paper,
+                Choose::Paper => p2 = Choose::Scissors,
+                Choose::Scissors => p2 = Choose::Rock,
+            },
+        }
 
         //println!("{:?}", line);
         //println!("{:?} {:?}", p1, p2);
