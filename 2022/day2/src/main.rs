@@ -42,15 +42,13 @@ fn main() {
         let mut p2 = Choose::from_p2(chars.last().unwrap()).unwrap();
 
         match p2 {
-            Choose::Rock => 
-            match p1 {
+            Choose::Rock => match p1 {
                 Choose::Rock => p2 = Choose::Scissors,
-                Choose::Paper => p2= Choose::Rock,
+                Choose::Paper => p2 = Choose::Rock,
                 Choose::Scissors => p2 = Choose::Paper,
             },
-            Choose::Paper => p2 = p1.clone(),
-            Choose::Scissors => 
-            match p1 {
+            Choose::Paper => p2 = p1,
+            Choose::Scissors => match p1 {
                 Choose::Rock => p2 = Choose::Paper,
                 Choose::Paper => p2 = Choose::Scissors,
                 Choose::Scissors => p2 = Choose::Rock,
@@ -75,7 +73,7 @@ fn main() {
                 (Choose::Scissors, Choose::Rock) => score += 6,
                 _ => score += 0,
             }
-        }      
+        }
     }
 
     println!("Score: {}", score);
