@@ -2,7 +2,7 @@ use std::fs::*;
 use std::io::*;
 
 fn main() {
-    let file = File::open("./res/input_test.txt").unwrap();
+    let file = File::open("./res/input_real.txt").unwrap();
     let mut list: Vec<i32> = Vec::new();
     list.push(0);
 
@@ -20,5 +20,13 @@ fn main() {
         }
     }
 
-    println!("{}", list.iter().max().unwrap());
+    list.sort();
+
+    let mut count = 0;
+
+    for item in list[list.len() - 3..].iter() {
+        count += item;
+    }
+
+    println!("{}", count);
 }
